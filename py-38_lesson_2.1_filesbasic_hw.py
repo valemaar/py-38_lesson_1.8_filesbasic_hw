@@ -25,6 +25,7 @@ def read_cookbook():
 print('cook_book:')
 pprint(read_cookbook())
 
+
 # task 2 (необходимо получить словарь из ингридиентов для заданного списка блюд и персон)
 cook_book = read_cookbook()
 print()
@@ -51,9 +52,59 @@ pprint(get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2))
 # task 3 (даны три текст.файла, объедините их в один, отсортировав при этом по кол-ву строк
 # и добавив служебную информацию)
 
-# def sort_files():
-#     file1_path = os.path.join(os.getcwd(), '1.txt')
-#     file2_path = os.path.join(os.getcwd(), '2.txt')
-#     file3_path = os.path.join(os.getcwd(), '3.txt')
-#     with open(file1_path, 'r', encoding='utf-8') as f:
-#         file1 = f.read()
+def sort_files(path1, path2, path3):
+    file1_path = os.path.join(os.getcwd(), path1)
+    file2_path = os.path.join(os.getcwd(), path2)
+    file3_path = os.path.join(os.getcwd(), path3)
+    with open(file1_path, 'r', encoding='utf-8') as f1:
+        file1 = f1.readlines()
+    with open(file2_path, 'r', encoding='utf-8') as f2:
+        file2 = f2.readlines()
+    with open(file3_path, 'r', encoding='utf-8') as f3:
+        file3 = f3.readlines()
+    with open('sorted.txt', 'w', encoding='utf-8') as f_summ:
+        if len(file1) < len(file2) and len(file1) < len(file3):
+            f_summ.write(path1 + '\n')
+            f_summ.write(str(len(file1)) + '\n')
+            f_summ.writelines(file1)
+            f_summ.write('\n')
+        elif len(file2) < len(file1) and len(file2) < len(file3):
+            f_summ.write(path2 + '\n')
+            f_summ.write(str(len(file2)) + '\n')
+            f_summ.writelines(file2)
+            f_summ.write('\n')
+        elif len(file3) < len(file1) and len(file3) < len(file2):
+            f_summ.write(path3 + '\n')
+            f_summ.write(str(len(file3)) + '\n')
+            f_summ.writelines(file3)
+            f_summ.write('\n')
+        if len(file1) < len(file2) and len(file1) > len(file3) or len(file1) > len(file2) and len(file1) < len(file3):
+            f_summ.write(path1 + '\n')
+            f_summ.write(str(len(file1)) + '\n')
+            f_summ.writelines(file1)
+            f_summ.write('\n')
+        elif len(file2) < len(file1) and len(file2) > len(file3) or len(file2) > len(file1) and len(file2) < len(file3):
+            f_summ.write(path2 + '\n')
+            f_summ.write(str(len(file2)) + '\n')
+            f_summ.writelines(file2)
+            f_summ.write('\n')
+        elif len(file3) < len(file1) and len(file3) > len(file2) or len(file3) > len(file1) and len(file3) < len(file2):
+            f_summ.write(path3 + '\n')
+            f_summ.write(str(len(file3)) + '\n')
+            f_summ.writelines(file3)
+            f_summ.write('\n')
+        if len(file1) > len(file2) and len(file1) > len(file3):
+            f_summ.write(path1 + '\n')
+            f_summ.write(str(len(file1)) + '\n')
+            f_summ.writelines(file1)
+        elif len(file2) > len(file1) and len(file2) > len(file3):
+            f_summ.write(path2 + '\n')
+            f_summ.write(str(len(file2)) + '\n')
+            f_summ.writelines(file2)
+        elif len(file3) > len(file1) and len(file3) > len(file2):
+            f_summ.write(path3 + '\n')
+            f_summ.write(str(len(file3)) + '\n')
+            f_summ.writelines(file3)
+    return
+
+sort_files('1.txt', '2.txt', '3.txt')
