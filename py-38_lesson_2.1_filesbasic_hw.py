@@ -22,35 +22,40 @@ def read_cookbook():
             cook_book[dish_name] = ing_list
     return cook_book
 
+
 print('cook_book:')
 pprint(read_cookbook())
-
 
 # task 2 (необходимо получить словарь из ингридиентов для заданного списка блюд и персон)
 cook_book = read_cookbook()
 print()
 print('Task 2')
+
+
 def get_shop_list_by_dishes(dishes, person_count):
     ingr_list = dict()
-    for dish_name in dishes: # итерируем список полученных блюд
+    for dish_name in dishes:  # итерируем список полученных блюд
         if dish_name in cook_book:
-            for ings in cook_book[dish_name]: # итерируем ингридиенты в блюде
+            for ings in cook_book[dish_name]:  # итерируем ингридиенты в блюде
                 meas_quan_list = dict()
                 if ings['ingredient_name'] not in ingr_list:
                     meas_quan_list['measure'] = ings['measure']
                     meas_quan_list['quantity'] = ings['quantity'] * person_count
                     ingr_list[ings['ingredient_name']] = meas_quan_list
                 else:
-                    ingr_list[ings['ingredient_name']]['quantity'] = ingr_list[ings['ingredient_name']]['quantity'] + ings['quantity'] * person_count
+                    ingr_list[ings['ingredient_name']]['quantity'] = ingr_list[ings['ingredient_name']]['quantity'] +\
+                                                                     ings['quantity'] * person_count
         else:
             print(f'\n"Такого блюда нет в списке!"\n')
     return ingr_list
+
 
 print('Словарь ингредиентов:')
 pprint(get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2))
 
 # task 3 (даны три текст.файла, объедините их в один, отсортировав при этом по кол-ву строк
 # и добавив служебную информацию)
+
 
 def sort_files(path1, path2, path3):
     file1_path = os.path.join(os.getcwd(), path1)
@@ -106,5 +111,6 @@ def sort_files(path1, path2, path3):
             f_summ.write(str(len(file3)) + '\n')
             f_summ.writelines(file3)
     return
+
 
 sort_files('1.txt', '2.txt', '3.txt')
